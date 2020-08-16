@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const rateLimit = require('express-rate-limit');
+// const rateLimit = require('express-rate-limit');
 const { checkUserSignIn, checkUserSignup } = require('./middlewares/validations');
 const mainRouter = require('./routes');
 const auth = require('./middlewares/auth');
@@ -16,12 +16,12 @@ const { PORT } = process.env;
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 100,
+// });
 
-app.use(limiter);
+// app.use(limiter);
 
 app.use(helmet());
 
