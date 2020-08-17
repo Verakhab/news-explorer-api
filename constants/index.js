@@ -6,4 +6,5 @@ module.exports = {
   CONFLICT_REQUEST: 'Такой email уже существует',
   BAD_REQUEST: 'Переданы не корректные данные',
   STRING_SECRET: 'some-secret-key',
+  TOO_MANY_REQUEST: 'Вы привысили число запросов',
 };

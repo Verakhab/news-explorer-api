@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const rateLimit = require('express-rate-limit');
+const rateLimit = require('./middlewares/rate-limiter');
 const { checkUserSignIn, checkUserSignup } = require('./middlewares/validations');
 const mainRouter = require('./routes');
 const auth = require('./middlewares/auth');
@@ -18,15 +18,9 @@ const app = express();
 
 app.set('trust proxy');
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: 'Вы привысили число запросов',
-});
-
 app.use(helmet());
 
-app.use(limiter);
+app.use(rateLimit);
 
 app.use(bodyParser.json());
 app.use(cookieParser());
