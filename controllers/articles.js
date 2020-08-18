@@ -7,7 +7,7 @@ const articlesGet = async (req, res, next) => {
     const { _id } = req.user;
     const userArticle = await Article.find({ owner: _id })
       .orFail(new NotFoundError(NOT_FOUND));
-    res.status(200).send(userArticle);
+    res.send(userArticle);
   } catch (err) {
     next(err);
   }
@@ -47,7 +47,7 @@ const articlesDelete = async (req, res, next) => {
     } else {
       const articleDelete = await Article.findByIdAndRemove(article)
         .orFail();
-      res.status(200).send(articleDelete);
+      res.send(articleDelete);
     }
   } catch (err) {
     next(err);

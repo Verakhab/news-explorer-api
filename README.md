@@ -2,7 +2,9 @@
 
 __Publik IP:__ 84.201.155.215
 
-__Domain:__ diploma.monster
+__Domain-API:__ api.diploma.monster www.api.diploma.monster
+
+__Domain-frontend:__ diploma.monster www.diploma.monster
 
 __GitHub:__ https://github.com/Verakhab/news-explorer-api
 

@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../exne');
-const { BadRequest, NotFoundError, ConflictRequest } = require('../errors');
-const { BAD_REQUEST, NOT_FOUND, CONFLICT_REQUEST } = require('../constants');
+const { BadRequest, ConflictRequest, Unauthorized } = require('../errors');
+const { BAD_REQUEST, CONFLICT_REQUEST, UNAUTHORIZED } = require('../constants');
 const { SECRET_STRING } = require('../config');
 
 const userMe = async (req, res, next) => {
@@ -10,7 +10,7 @@ const userMe = async (req, res, next) => {
     const { _id } = req.user;
     const user = await User.findById(_id)
       .orFail(new BadRequest(BAD_REQUEST));
-    res.status(200).send({ email: user.email, name: user.name });
+    res.send({ email: user.email, name: user.name });
   } catch (err) {
     next(err);
   }
@@ -43,10 +43,10 @@ const userIn = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email }).select('+password')
-      .orFail(new NotFoundError(NOT_FOUND));
+      .orFail(new Unauthorized(UNAUTHORIZED));
     const passProv = await bcrypt.compare(password, user.password);
     if (!passProv) {
-      throw new BadRequest(BAD_REQUEST);
+      throw new Unauthorized(UNAUTHORIZED);
     }
     const token = jwt.sign({ _id: user._id },
       SECRET_STRING,
@@ -55,7 +55,7 @@ const userIn = async (req, res, next) => {
       httpOnly: true,
       sameSite: true,
     });
-    res.status(200).send({ jwt: token });
+    res.send({ jwt: token });
   } catch (err) {
     next(err);
   }
