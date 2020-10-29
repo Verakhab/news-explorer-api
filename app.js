@@ -14,11 +14,7 @@ const { PORT } = process.env;
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:8080',
-  optionsSuccessStatus: 200,
-  credentials: true,
-}));
+app.use(cors());
 
 app.set('trust proxy');
 
