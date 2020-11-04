@@ -52,10 +52,10 @@ const userIn = async (req, res, next) => {
       SECRET_STRING,
       { expiresIn: '7d' });
     res.cookie('jwt', token, {
+      maxAge: 7 * 24 * 60 * 60000,
       httpOnly: true,
       sameSite: true,
-    });
-    res.send({ jwt: token });
+    }).send({ jwt: token });
   } catch (err) {
     next(err);
   }
