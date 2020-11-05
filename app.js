@@ -1,7 +1,6 @@
 require('dotenv').config();
 const helmet = require('helmet');
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
@@ -13,12 +12,6 @@ const errorHandler = require('./middlewares/error-handler');
 const { PORT } = process.env;
 
 const app = express();
-
-const corsOptions = {
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
 
 app.set('trust proxy');
 
