@@ -15,13 +15,6 @@ const { PORT } = process.env;
 const app = express();
 
 const corsOptions = {
-  origin: ['https://verakhab.github.io/news-explorer-frontend/',
-    'http://localhost:8080/',
-    'https://web.students.nomoreparties.co/',
-    'https://www.web.students.nomoreparties.co/',
-    'http://www.web.students.nomoreparties.co/',
-    'http://web.students.nomoreparties.co/',
-  ],
   credentials: true,
 };
 
