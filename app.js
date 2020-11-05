@@ -32,8 +32,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(allowedCors);
-
 app.set('trust proxy');
 
 app.use(helmet());
