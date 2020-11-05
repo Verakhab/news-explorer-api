@@ -1,6 +1,7 @@
 require('dotenv').config();
 const helmet = require('helmet');
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
@@ -12,6 +13,19 @@ const errorHandler = require('./middlewares/error-handler');
 const { PORT } = process.env;
 
 const app = express();
+
+const corsOptions = {
+  origin: ['https://verakhab.github.io/news-explorer-frontend/',
+    'http://localhost:8080/',
+    'https://web.students.nomoreparties.co/',
+    'https://www.web.students.nomoreparties.co/',
+    'http://www.web.students.nomoreparties.co/',
+    'http://web.students.nomoreparties.co/',
+  ],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.set('trust proxy');
 
