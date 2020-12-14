@@ -19,23 +19,10 @@ const articlesPost = async (req, res, next) => {
     const {
       keyword, title, text, date, source, link, image,
     } = req.body;
-    await Article.create({
+    const newArticle = await Article.create({
       keyword, title, text, date, source, link, image, owner: _id,
     });
-    const userArticle = await Article.find({
-      keyword, title, text, date, source, link, image, owner: _id,
-    })
-      .orFail(new NotFoundError(NOT_FOUND));
-    res.status(201).send(userArticle);
-    // res.status(201).send({
-    //   keyword,
-    //   title,
-    //   text,
-    //   date,
-    //   source,
-    //   link,
-    //   image,
-    // });
+    res.status(205).send(newArticle);
   } catch (err) {
     next(err);
   }
