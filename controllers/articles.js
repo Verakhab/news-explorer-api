@@ -19,19 +19,10 @@ const articlesPost = async (req, res, next) => {
     const {
       keyword, title, text, date, source, link, image,
     } = req.body;
-    await Article.create({
+    const newArticle = await Article.create({
       keyword, title, text, date, source, link, image, owner: _id,
     });
-    res.status(201).send({
-      keyword,
-      title,
-      text,
-      date,
-      source,
-      link,
-      image,
-      _id,
-    });
+    res.status(201).send(newArticle);
   } catch (err) {
     next(err);
   }
