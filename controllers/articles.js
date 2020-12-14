@@ -22,7 +22,7 @@ const articlesPost = async (req, res, next) => {
     const newArticle = await Article.create({
       keyword, title, text, date, source, link, image, owner: _id,
     });
-    res.status(201).send({ newArticle });
+    res.status(201).send(newArticle);
   } catch (err) {
     next(err);
   }
