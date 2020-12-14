@@ -22,16 +22,20 @@ const articlesPost = async (req, res, next) => {
     await Article.create({
       keyword, title, text, date, source, link, image, owner: _id,
     });
-    res.status(201).send({
-      keyword,
-      title,
-      text,
-      date,
-      source,
-      link,
-      image,
-      _id,
-    });
+    const userArticle = await Article.find({
+      keyword, title, text, date, source, link, image, owner: _id,
+    })
+      .orFail(new NotFoundError(NOT_FOUND));
+    res.status(201).send(userArticle);
+    // res.status(201).send({
+    //   keyword,
+    //   title,
+    //   text,
+    //   date,
+    //   source,
+    //   link,
+    //   image,
+    // });
   } catch (err) {
     next(err);
   }
