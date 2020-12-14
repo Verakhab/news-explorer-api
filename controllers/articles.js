@@ -30,6 +30,7 @@ const articlesPost = async (req, res, next) => {
       source,
       link,
       image,
+      _id,
     });
   } catch (err) {
     next(err);
