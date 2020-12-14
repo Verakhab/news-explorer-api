@@ -7,12 +7,8 @@ module.exports = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization || !authorization.startsWith('Bearer ')) throw new Unauthorized(UNAUTHORIZED);
   const token = authorization.replace('Bearer ', '');
-  // const auth = req.cookies.jwt;
   let payload;
   try {
-    // if (!auth) {
-    //   throw new Unauthorized(UNAUTHORIZED);
-    // }
     payload = await jwt.verify(token, SECRET_STRING);
   } catch (err) {
     if (err.name === 'JsonWebTokenError') {
